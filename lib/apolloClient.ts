@@ -19,7 +19,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? 'Basic Zm5BRDllN1pDOEFDQTNsTXh4YUlHX3A3cXlUYk9OSG12TGtWSngydDphaXJibmI6c2VydmVy' : '',
+      authorization: token ? `Basic ${token}` : '',
     },
   };
 });

@@ -4,11 +4,12 @@ import Layout from '../components/Layout';
 import { useFindCafeEntryByIdQuery } from '../generated/graphql';
 
 const IndexPage = () => {
-  // const { data } = useFindCafeEntryByIdQuery({
-  //   variables: {
-  //     id: '285877418905829901',
-  //   },
-  // });
+  const { data } = useFindCafeEntryByIdQuery({
+    variables: {
+      id: '285877418905829901',
+    },
+  });
+  console.log(data);
   const deferredPrompt = useRef(null);
   const installApp = () => {
     if (!deferredPrompt.current) return false;
