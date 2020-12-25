@@ -1,0 +1,16 @@
+query selectCafes{
+  cafes{
+    data {
+      name
+    }
+  }
+}
+
+query findCafeEntryByID($id: ID!){
+  findCafeEntryByID(id: $id){
+    _id
+    _ts
+    name
+    location
+  }
+}

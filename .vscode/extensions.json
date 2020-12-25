@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "ms-ceintl.vscode-language-pack-ko",
+        "whtouche.vscode-js-console-utils",
+        "dbaeumer.vscode-eslint",
+        "jpoissonnier.vscode-styled-components",
+        "eamodio.gitlens",
+    ],
+}
