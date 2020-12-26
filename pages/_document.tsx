@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
 
     try {
       ctx.renderPage = () => originalRenderPage({
-        enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        enhanceApp: (App: any) => (props: any) => sheet.collectStyles(<App {...props} />),
       });
 
       const initialProps = await Document.getInitialProps(ctx);
@@ -57,7 +57,7 @@ export default class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
           <link rel="manifest" href="/manifest.json" />
-          <meta name="theme-color" content="#317EFB" />
+          <meta name="theme-color" content="#f084ba" />
         </Head>
         <body>
           <Main />

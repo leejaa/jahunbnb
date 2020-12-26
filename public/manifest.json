@@ -1,13 +1,13 @@
 {
+    "name": "jahunbnb",
     "theme_color": "#f6357c",
     "background_color": "#f6357c",
-    "display": "fullscreen",
+    "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "app_name": "jahunbnb",
     "short_name": "jahunbnb",
     "description": "jahunbnb",
-    "name": "jahunbnb",
     "icons": [
         {
             "src": "/icon-192x192.png",

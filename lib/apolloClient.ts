@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
 import {
-  ApolloClient, createHttpLink, InMemoryCache,
+  ApolloClient, createHttpLink, InMemoryCache, makeVar,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import merge from 'deepmerge';
 import isEqual from 'lodash/isEqual';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
+export const SELECT_CAFES = makeVar([]);
 
 let apolloClient : any;
 const httpLink = createHttpLink({
@@ -27,7 +28,20 @@ function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            selectCafes: {
+              read() {
+                return SELECT_CAFES();
+              },
+            },
+          },
+        },
+      },
+    }),
+    connectToDevTools: true,
   });
 }
 
