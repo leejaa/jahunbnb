@@ -8,6 +8,7 @@ import isEqual from 'lodash/isEqual';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 export const SELECT_CAFES = makeVar([]);
+export const SCREEN_SIZE = makeVar({ width: 0, height: 0 });
 
 let apolloClient : any;
 const httpLink = createHttpLink({
@@ -35,6 +36,11 @@ function createApolloClient() {
             selectCafes: {
               read() {
                 return SELECT_CAFES();
+              },
+            },
+            selectScreenSize: {
+              read() {
+                return SCREEN_SIZE();
               },
             },
           },
