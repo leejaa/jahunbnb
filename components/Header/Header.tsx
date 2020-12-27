@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
-import { usePlayAnimation, useRepeatAction } from '../../hooks/useRepeatAction';
+import { useRepeatAction } from '../../hooks/useRepeatAction';
 
 import { Container, SpanContainer } from '../../utils/styles';
 import {
