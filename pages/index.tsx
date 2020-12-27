@@ -9,7 +9,7 @@ import { useGetLocation } from '../hooks/useGetLocation';
 import { SCREEN_SIZE, SELECT_CAFES } from '../lib/apolloClient';
 import { Container, SCREEN_HEIGHT, SCREEN_WIDTH } from '../utils/styles';
 
-const ADJUST_RATE = 0.8;
+const ADJUST_RATE = 1;
 
 const IndexPage = () => {
   const selectCafes = useReactiveVar(SELECT_CAFES);

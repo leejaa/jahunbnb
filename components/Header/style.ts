@@ -12,7 +12,7 @@ export const styles = {
     ParentContainer: React.CSSProperties,
   };
 
-export const FONT_SIZE = '0.5rem';
+export const FONT_SIZE = '0.9rem';
 
 export const ArrowLeftIcon = styled(AiOutlineArrowLeft)`
     font-size: 1.2rem;
