@@ -4,6 +4,8 @@ import styled from 'styled-components';
 export const SCREEN_WIDTH = typeof window !== 'undefined' ? window.outerWidth : 1920;
 export const SCREEN_HEIGHT = typeof window !== 'undefined' ? window.outerHeight : 1080;
 
+export const AIRBNB_PINK = '#F83E82';
+
 export const Container : any = styled.div`
     width: ${({ w } : any) => w ?? `${SCREEN_WIDTH}px`};
     height: ${({ h } : any) => h ?? `${SCREEN_HEIGHT}px`};

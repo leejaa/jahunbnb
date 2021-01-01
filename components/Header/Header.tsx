@@ -1,5 +1,7 @@
 import _ from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import { useRepeatAction } from '../../hooks/useRepeatAction';
 
 import { Container, SpanContainer } from '../../utils/styles';
