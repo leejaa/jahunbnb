@@ -9,7 +9,7 @@ import {
 } from '../../utils/styles';
 import { styles } from './style';
 
-const FOOTER_HEIGHT = SCREEN_HEIGHT / 16;
+const FOOTER_HEIGHT = SCREEN_HEIGHT / 17;
 
 export interface FooterProps {
     contentArray?: { name: string, select: boolean }[]

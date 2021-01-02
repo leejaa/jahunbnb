@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 // 스크린 사이즈
@@ -83,3 +84,12 @@ export const InputContainer : any = styled.input`
         color: ${({ placeholderColor }: any) => placeholderColor ?? 'null'};
     }
 `;
+
+export const indexStyles = {
+  Container: {
+    overscrollBehavior: 'none',
+    overflowY: 'hidden',
+  },
+} as {
+    Container: React.CSSProperties,
+      };

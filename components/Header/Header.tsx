@@ -28,7 +28,17 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
   useRepeatAction({ action: fnPlayChangeText2 });
   return (
-    <Container w="100%" h="100%" dp="flex" fd="row" ai="center" jc="space-between" br="5rem" style={styles.ParentContainer}>
+    <Container
+      w="100%"
+      h="100%"
+      dp="flex"
+      fd="row"
+      ai="center"
+      jc="space-between"
+      br="5rem"
+      bc="white"
+      style={styles.ParentContainer}
+    >
       <Container w="35%" h="100%" dp="flex" fd="row" ai="center" jc="space-around" pt="0.4rem" pb="0.4rem">
         <ArrowLeftIcon />
         <SpanContainer fs={FONT_SIZE} fw="bold">{text1}</SpanContainer>

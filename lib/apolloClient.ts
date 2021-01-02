@@ -8,7 +8,7 @@ import isEqual from 'lodash/isEqual';
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 export const SELECT_CAFES = makeVar([]);
-export const SCREEN_SIZE = makeVar({ width: 0, height: 0 });
+export const SCREEN_SIZE = makeVar<{ width: number, height: number }>({ width: 0, height: 0 });
 
 let apolloClient : any;
 const httpLink = createHttpLink({

@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps);
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      SCREEN_SIZE({ width: window.screen.width, height: window.screen.height });
+      SCREEN_SIZE({ width: window.innerWidth, height: window.innerHeight });
     }
   }, []);
   return (
