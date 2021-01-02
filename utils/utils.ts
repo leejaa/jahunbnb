@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 export const fnFindClosestNumber = ({ num, arr } : { num: number, arr: number[] }) => {
   let curr = arr[0];
   let diff = Math.abs(num - curr);

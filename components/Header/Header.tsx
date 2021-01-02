@@ -17,7 +17,7 @@ export interface HeaderProps {
 }
 
 let tempIndex: number = 0;
-export const Header: React.FC<HeaderProps> = ({
+const HeaderComponent: React.FC<HeaderProps> = ({
   text1 = '근처 추천 장소',
   text2List = ['날짜입력', '게스트추가'],
 }) => {
@@ -66,3 +66,5 @@ export const Header: React.FC<HeaderProps> = ({
     </Container>
   );
 };
+
+export const Header = React.memo(HeaderComponent);

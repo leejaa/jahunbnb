@@ -5,6 +5,7 @@ import React, {
 } from 'react';
 import { Footer } from '../components/Footer/Footer';
 import { Header } from '../components/Header/Header';
+import { useDetechInitialRender } from '../hooks/useDetectInitialRender';
 import { useFetch } from '../hooks/useFetch';
 import { useGetLocation } from '../hooks/useGetLocation';
 import { useSlideDiv } from '../hooks/useSlide';
@@ -15,22 +16,27 @@ import {
 import { BREAKING_POINTS_TYPES } from '../utils/types';
 
 const ADJUST_RATE = 1;
-// const BREAKING_POINTS: BREAKING_POINTS_TYPES = [
-//   { top: SCREEN_HEIGHT * 0.48, initial: true },
-//   { top: SCREEN_HEIGHT * 0.8, initial: false },
-// ];
 
-const IndexPage = () => {
-  const contentRef = useRef<React.MutableRefObject<HTMLDivElement | undefined>>();
+const IndexPage = ({ isServer } : { isServer: boolean }) => {
+  const contentRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
+  const headerBoxRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
   const selectCafes = useReactiveVar(SELECT_CAFES);
   const screenSize = useReactiveVar(SCREEN_SIZE);
-  const BREAKING_POINTS: BREAKING_POINTS_TYPES = useMemo(() => [
+  const breakingPoints: BREAKING_POINTS_TYPES = useMemo(() => [
     { top: 0, initial: false },
     { top: (screenSize.height ?? 0) * 0.48, initial: true },
     { top: (screenSize.height ?? 0) * 0.8, initial: false },
   ], [screenSize.height]);
   const { location } = useGetLocation();
-  useSlideDiv({ ref: contentRef as any, breakingPoints: BREAKING_POINTS });
+  const triggerEvent = useCallback(({ top } : { top: number }) => {
+    let newValue = ((_.find(breakingPoints, ['initial', true])?.top ?? 0) - top) / (_.find(breakingPoints, ['initial', true])?.top ?? 0);
+    newValue = _.lt(newValue, 0) ? 0 : newValue;
+    newValue = _.gt(newValue, 0.8) ? 1 : newValue;
+    if (headerBoxRef?.current) {
+      headerBoxRef.current.style.backgroundColor = `rgba(255,255,255,${newValue})`;
+    }
+  }, [breakingPoints]);
+  useSlideDiv({ ref: contentRef as any, breakingPoints, triggerEvent });
   const initialAction = useCallback(async () => {
     if (_.isEmpty(selectCafes) && !_.isUndefined(location)) {
       const data = await useFetch({
@@ -49,12 +55,29 @@ const IndexPage = () => {
       position="absolute"
       z={100}
       left="0px"
-      top={`${_.find(BREAKING_POINTS, ['initial', true])?.top}px`}
+      top={`${_.find(breakingPoints, ['initial', true])?.top}px`}
       br="1.2rem"
       btrr="1.2rem"
       bc="white"
     />
-  ), [BREAKING_POINTS]);
+  ), [breakingPoints]);
+  const fnDrawSearchBox = useCallback(() => (
+    <Container
+      w="100%"
+      h="7%"
+      dp="flex"
+      fd="row"
+      jc="center"
+      ai="center"
+      bc="rgba(255,255,255,0)"
+      ref={headerBoxRef}
+      z={200}
+    >
+      <Container w="90%" h="80%">
+        <Header />
+      </Container>
+    </Container>
+  ), []);
   // useEffect(() => {
   //   initialAction();
   // }, [initialAction]);
@@ -67,15 +90,13 @@ const IndexPage = () => {
       style={indexStyles.Container}
       bc="black"
     >
-      <Container w="100%" h="7%" dp="flex" fd="row" jc="center" ai="center">
-        <Container w="90%" h="80%">
-          <Header />
-        </Container>
-      </Container>
+      {fnDrawSearchBox()}
       {fnDrawContents()}
       <Footer />
     </Container>
   );
 };
+
+IndexPage.getInitialProps = async ({ req }: { req: any }) => ({ isServer: !!req });
 
 export default IndexPage;
