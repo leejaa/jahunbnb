@@ -7,6 +7,7 @@ export const SCREEN_WIDTH = typeof window !== 'undefined' ? window.outerWidth : 
 export const SCREEN_HEIGHT = typeof window !== 'undefined' ? window.outerHeight : 1080;
 
 export const AIRBNB_PINK = '#F83E82';
+export const AIRBNB_GRAY = '#4D4D4D';
 
 export const Container : any = styled.div`
     width: ${({ w } : any) => w ?? `${SCREEN_WIDTH}px`};
@@ -55,7 +56,7 @@ export const SpanContainer : any = styled.span`
     font-size: ${({ fs }: any) => fs ?? '10px'};
     color: ${({ color }: any) => color ?? 'black'};
     font-weight: ${({ fw }: any) => fw ?? 'normal'};
-    font-family: ${({ ff }: any) => ff ?? '"Courier New"'};
+    font-family: ${({ ff }: any) => ff ?? 'Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif'};
     margin-top: ${({ mt } : any) => mt ?? '0px'};
     margin-left: ${({ ml } : any) => ml ?? '0px'};
     margin-right: ${({ mr } : any) => mr ?? '0px'};

@@ -3,9 +3,10 @@ import React, {
   useCallback, useEffect, useRef, useState,
 } from 'react';
 import {
+  AIRBNB_GRAY,
   AIRBNB_PINK, Container, SCREEN_HEIGHT, SpanContainer,
 } from '../../utils/styles';
-import { CarouselMultiStyles, PictureImage } from './style';
+import { CarouselMultiStyles, PictureImage, StarIcon } from './style';
 
 type CarouselMultiPropsType = { imgUri: string, score: number, title: string, content: string }[];
 
@@ -28,9 +29,6 @@ const CarouselMultiComponent: React.FC<CarouselMultiProps> = ({
   height = 12,
 }) => {
   const wrapperRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
-  useEffect(() => {
-    wrapperRef.current?.scrollTo(0, 1000);
-  }, []);
   return (
     <Container
       ref={wrapperRef}
@@ -48,6 +46,18 @@ const CarouselMultiComponent: React.FC<CarouselMultiProps> = ({
               _.map(contentArray, (item) => (
                 <Container w={`${cardSize}rem`} h="100%">
                   <PictureImage src={item.imgUri} alt="숙소사진" />
+                  <Container w="100%" h="30%">
+                    <Container w="100%" h="30%" dp="flex" fd="row" ai="center">
+                      <StarIcon />
+                      <SpanContainer fs="0.8rem" fw="bold" ml="0.2rem">{item.score}</SpanContainer>
+                    </Container>
+                    <Container w="100%" h="40%">
+                      <SpanContainer fs="0.9rem" fw="bold" ml="0.2rem">{item.title}</SpanContainer>
+                    </Container>
+                    <Container w="100%" h="30%">
+                      <SpanContainer fs="0.8rem" fw="bold" ml="0.2rem" color={AIRBNB_GRAY}>{item.content}</SpanContainer>
+                    </Container>
+                  </Container>
                 </Container>
               ))
           }

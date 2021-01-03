@@ -19,8 +19,9 @@ import { BREAKING_POINTS_TYPES } from '../utils/types';
 
 const ADJUST_RATE = 1;
 
-const IndexPage = ({ isServer } : { isServer: boolean }) => {
+const IndexPage = () => {
   const contentRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
+  const cardCarouselRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
   const headerBoxRef: React.MutableRefObject<HTMLDivElement | undefined> = useRef();
   const selectCafes = useReactiveVar(SELECT_CAFES);
   const screenSize = useReactiveVar(SCREEN_SIZE);
@@ -38,7 +39,9 @@ const IndexPage = ({ isServer } : { isServer: boolean }) => {
       headerBoxRef.current.style.backgroundColor = `rgba(255,255,255,${newValue})`;
     }
   }, [breakingPoints]);
-  useSlideDiv({ ref: contentRef as any, breakingPoints, triggerEvent });
+  useSlideDiv({
+    ref: contentRef as any, breakingPoints, triggerEvent, exceptRef: cardCarouselRef,
+  });
   const initialAction = useCallback(async () => {
     if (_.isEmpty(selectCafes) && !_.isUndefined(location)) {
       const data = await useFetch({
@@ -72,7 +75,7 @@ const IndexPage = ({ isServer } : { isServer: boolean }) => {
         <SpanContainer fs="1.5rem" fw="bold">대구</SpanContainer>
         <ArrowRightIcon style={{ marginRight: '1rem' }} />
       </Container>
-      <Container w="100%" h="15rem">
+      <Container w="100%" h="15rem" ref={cardCarouselRef}>
         <CarouselMulti
           cardSize={16}
           contentArray={mockData}
@@ -116,7 +119,5 @@ const IndexPage = ({ isServer } : { isServer: boolean }) => {
     </Container>
   );
 };
-
-IndexPage.getInitialProps = async ({ req }: { req: any }) => ({ isServer: !!req });
 
 export default IndexPage;

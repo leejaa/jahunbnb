@@ -9,20 +9,25 @@ import { fnFindClosestNumber } from '../utils/utils';
 let currentScreenY: number;
 let newTop: number;
 let isDragging: boolean = false;
-export const useSlideDiv = ({ ref, breakingPoints, triggerEvent }
-     : { ref: React.MutableRefObject<HTMLDivElement | undefined>, breakingPoints: BREAKING_POINTS_TYPES, triggerEvent?: Function }) => {
+export const useSlideDiv = ({
+  ref, breakingPoints, triggerEvent, exceptRef,
+}
+     : { ref: React.MutableRefObject<HTMLDivElement | undefined>, breakingPoints: BREAKING_POINTS_TYPES, triggerEvent?: Function,
+      exceptRef?: React.MutableRefObject<HTMLDivElement | undefined> }) => {
   const topRate = useMemo(() => {
     let result = ((_.find(breakingPoints, ['initial', true])?.top ?? 0) - newTop) / (_.find(breakingPoints, ['initial', true])?.top ?? 0);
     result = _.lt(result, 0) ? 0 : result;
     return result;
   }, [breakingPoints]);
   const onTouchStart = useCallback((e: TouchEvent) => {
-    isDragging = true;
-    currentScreenY = e.targetTouches?.[0]?.screenY;
-    if (ref?.current && _.isEmpty(ref.current.style.top)) {
-      ref.current.style.top = `${_.find(breakingPoints, ['initial', true])?.top}px`;
+    if (!exceptRef?.current?.contains(e.target as Node)) {
+      isDragging = true;
+      currentScreenY = e.targetTouches?.[0]?.screenY;
+      if (ref?.current && _.isEmpty(ref.current.style.top)) {
+        ref.current.style.top = `${_.find(breakingPoints, ['initial', true])?.top}px`;
+      }
     }
-  }, [breakingPoints, ref]);
+  }, [breakingPoints, exceptRef, ref]);
   const onTouchMove = useCallback((e: TouchEvent) => {
     if (isDragging) {
       if (ref?.current) {
