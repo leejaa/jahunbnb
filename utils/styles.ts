@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { IoIosArrowForward } from 'react-icons/io';
 
 // 스크린 사이즈
 export const SCREEN_WIDTH = typeof window !== 'undefined' ? window.outerWidth : 1920;
@@ -84,6 +85,9 @@ export const InputContainer : any = styled.input`
         color: ${({ placeholderColor }: any) => placeholderColor ?? 'null'};
     }
 `;
+export const ArrowRightIcon = styled(IoIosArrowForward)`
+    font-size: 2rem;
+`;
 
 export const indexStyles = {
   Container: {
@@ -92,4 +96,4 @@ export const indexStyles = {
   },
 } as {
     Container: React.CSSProperties,
-      };
+};

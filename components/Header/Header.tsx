@@ -12,8 +12,8 @@ import {
 const MAX_TEXT2_INDEX = 1;
 
 export interface HeaderProps {
-    text1?: string,
-    text2List?: string[]
+    text1?: string;
+    text2List?: string[];
 }
 
 let tempIndex: number = 0;

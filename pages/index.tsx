@@ -3,6 +3,7 @@ import _ from 'lodash';
 import React, {
   useCallback, useEffect, useMemo, useRef, useState,
 } from 'react';
+import { CarouselMulti, mockData } from '../components/Carousel/CarouselMulti';
 import { Footer } from '../components/Footer/Footer';
 import { Header } from '../components/Header/Header';
 import { useDetechInitialRender } from '../hooks/useDetectInitialRender';
@@ -11,7 +12,8 @@ import { useGetLocation } from '../hooks/useGetLocation';
 import { useSlideDiv } from '../hooks/useSlide';
 import { SCREEN_SIZE, SELECT_CAFES } from '../lib/apolloClient';
 import {
-  Container, indexStyles, SCREEN_HEIGHT, SCREEN_WIDTH,
+  ArrowRightIcon,
+  Container, indexStyles, SCREEN_HEIGHT, SCREEN_WIDTH, SpanContainer,
 } from '../utils/styles';
 import { BREAKING_POINTS_TYPES } from '../utils/types';
 
@@ -50,8 +52,6 @@ const IndexPage = ({ isServer } : { isServer: boolean }) => {
     <Container
       ref={contentRef}
       w="100%"
-      h="2000px"
-      border={1}
       position="absolute"
       z={100}
       left="0px"
@@ -59,7 +59,27 @@ const IndexPage = ({ isServer } : { isServer: boolean }) => {
       br="1.2rem"
       btrr="1.2rem"
       bc="white"
-    />
+      pl="1rem"
+    >
+      <Container
+        w="100%"
+        h="5rem"
+        dp="flex"
+        fd="row"
+        ai="center"
+        jc="space-between"
+      >
+        <SpanContainer fs="1.5rem" fw="bold">대구</SpanContainer>
+        <ArrowRightIcon style={{ marginRight: '1rem' }} />
+      </Container>
+      <Container w="100%" h="15rem">
+        <CarouselMulti
+          cardSize={16}
+          contentArray={mockData}
+          height={15}
+        />
+      </Container>
+    </Container>
   ), [breakingPoints]);
   const fnDrawSearchBox = useCallback(() => (
     <Container
